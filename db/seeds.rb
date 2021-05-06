@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Post.destroy_all
+
+100.times do
+    created_at = Faker::Date.backward(days:365 * 5)
+
+    Post.create(
+        title: Faker::TvShows::GameOfThrones.character,
+        body: Faker::Lorem.sentence(word_count: 55)
+    )
+end
+
+posts = Post.all
+
+puts "Generated #{posts.count} posts!"
