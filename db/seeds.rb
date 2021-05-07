@@ -7,16 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Post.destroy_all
+Comment.destroy_all
 
-100.times do
+50.times do
     created_at = Faker::Date.backward(days:365 * 5)
 
-    Post.create(
+    p = Post.create(
         title: Faker::TvShows::GameOfThrones.character,
         body: Faker::Lorem.sentence(word_count: 55)
     )
+    if p.persisted?
+        p.comments = rand(1..10).times.map do
+            Comment.new(body: Faker::GreekPhilosophers.quote)
+        end
+    end
 end
 
 posts = Post.all
+comments = Comment.all
 
 puts "Generated #{posts.count} posts!"
+puts "Generated #{comments.count} comments!"
