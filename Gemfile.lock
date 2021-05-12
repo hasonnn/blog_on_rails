@@ -185,7 +185,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
-  bootstrap (~> 4.6.0)
+  bootstrap (~> 4.6)
   byebug
   faker
   jbuilder (~> 2.7)

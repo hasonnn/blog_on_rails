@@ -1,17 +1,18 @@
-
-<%= form_with(model:[@post, @comment], local:true) do |f| %>
-<% if @comment.errors.full_messages.each do |msg| %>
-<ul>
-    <li> <%= msg %></li>
-</ul>
-    <% end %>
-<% end %>
-
-<br>
-<p>Comment</p>
 <div>
-    <%= f.text_area(:body, cols: 50, rows:5, placeholder: `What's on your mind?`) %>
-</div>
+    <%= form_with(model:[@post, @comment], local:true) do |f| %>
+    <% if @comment.errors.full_messages.each do |msg| %>
+    <ul>
+        <li> <%= msg %></li>
+    </ul>
+        <% end %>
+    <% end %>
 
-    <%= f.submit %>
-<% end %>
+    <br>
+    <p>Comment</p>
+    <div>
+        <%= f.text_area(:body, cols: 50, rows:5, placeholder: `What's on your mind?`) %>
+    </div>
+
+        <%= f.submit %>
+    <% end %>
+</div>
