@@ -1,1 +1,16 @@
-<%= render 'form' %>
+<div class="padding">
+    <%= form_for @post do |f| %>
+        <br>
+        <div class="form-group">
+            <%= f.label :title %>: <br>
+            <%= f.text_area(:title, rows:2, cols:75) %>
+        </div>
+        <div class="form-group">
+            <%= f.label :body %>: <br>
+            <%= f.text_area(:body, rows:7, cols:75) %>
+            
+        </div>
+        <br>
+        <button class="btn btn-outline-primary" type="submit">Update Post</button>
+    <% end %>
+</div>

@@ -8,11 +8,10 @@
     <% end %>
 
     <br>
-    <p>Comment</p>
+    <h3>Comment</h3>
     <div>
-        <%= f.text_area(:body, cols: 50, rows:5, placeholder: `What's on your mind?`) %>
+        <%= f.text_area(:body, cols: 75, rows:5, placeholder: `What's on your mind?`) %>
     </div>
-
-        <%= f.submit %>
+    <button class="btn btn-outline-primary" type="submit">Comment</button>
     <% end %>
 </div>

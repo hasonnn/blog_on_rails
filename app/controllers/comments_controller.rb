@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
         if @comment.save
           redirect_to post_path(@post), notice: 'Comment created!'
         else
-          render '/post/show'
+          render 'posts/show'
         end
       end
       def destroy
