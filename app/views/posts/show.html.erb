@@ -3,9 +3,8 @@
     <p><%= @post.body %></p>
     <p>Posted: <%= time_ago_in_words(@post.created_at)%> ago</p>
 
-   
-    <button type="button" class="btn btn-outline-primary"><%= link_to "Edit", edit_post_path(@post)%></button>
-    <button type="button" class="btn btn-outline-primary"><%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %></button>
+    <%= link_to '<button type="button" class="btn btn-outline-primary">Edit</button>'.html_safe, edit_post_path(@post) %>
+    <%= link_to '<button type="button" class="btn btn-outline-primary">Delete</button>'.html_safe, post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
 
     <%= render 'comments/form'%>
     <br> 
