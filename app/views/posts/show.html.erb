@@ -4,14 +4,21 @@
     <h4>Created by: <%= @post.user&.full_name || 'DELETED'%></h4>
     <p>Posted: <%= time_ago_in_words(@post.created_at)%> ago</p>
 
-    <%= link_to '<button type="button" class="btn btn-outline-primary">Edit</button>'.html_safe, edit_post_path(@post) %>
-    <%= link_to '<button type="button" class="btn btn-outline-primary">Delete</button>'.html_safe, post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% if can?(:crud, @post)%>
+        <%= link_to '<button type="button" class="btn btn-outline-primary">Edit</button>'.html_safe, edit_post_path(@post) %>
+        <%= link_to '<button type="button" class="btn btn-outline-primary">Delete</button>'.html_safe, post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %> 
 
     <%= render 'comments/form'%>
     <br> 
     <% @comments.each do |comment| %>
     <%= comment.body %> <br>
-    <small>Commented: <%= time_ago_in_words(comment.created_at)%> ago | <%= link_to(" Delete", post_comment_path(@post, comment), method: :delete, data:{confirm: 'Are you sure?'})%> </small>
+    <small>
+        Commented: <%= time_ago_in_words(comment.created_at)%> ago | 
+        <% if can? :crud, comment %>
+            <%= link_to(" Delete", post_comment_path(@post, comment), method: :delete, data:{confirm: 'Are you sure?'})%> 
+        <% end %>
+    </small>
     <small> Commented by: <%= comment.user&.full_name || 'DELETED' %></small>
     <hr>
 
