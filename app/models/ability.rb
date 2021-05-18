@@ -40,5 +40,9 @@ class Ability
     can(:crud, Comment) do |comment|
       user == comment.user
     end
+
+    if user.is_admin?
+      can :manage, :all 
+    end
   end
 end
