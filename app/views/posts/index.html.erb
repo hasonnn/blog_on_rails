@@ -1,14 +1,10 @@
 <h1 class="padding">Post Index Page</h1>
 
-<div class="padding">
-    <% @posts.each_slice(3) do |posts| %>
-        <div class="row">
-            <% @posts.each do |post| %>
-                <div class="col-sm-10  col-lg-4 card padding">
-                    <h2><%= link_to post.title, post_path(post) %></h2>
-                    <p><%= post.body %></p>
-                 </div>
-            <% end %>
-        </div>
+<div class="padding row">
+    <% @posts.each do |post| %>
+        <div class="card col-md-4 rounded p-3 ">
+            <h2><%= link_to post.title, post_path(post) %></h2>
+            <p><%= post.body %></p>
+            </div>
     <% end %>
 </div>

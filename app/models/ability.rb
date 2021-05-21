@@ -41,6 +41,10 @@ class Ability
       user == comment.user
     end
 
+    can(:crud, User) do |user|
+      user == user.user
+    end
+
     if user.is_admin?
       can :manage, :all 
     end

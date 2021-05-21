@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :authenticate_user!, except: [:new, :create]
     def new
         @user=User.new
     end
@@ -8,8 +9,41 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to root_path, notice: "Logged In!"
         else
+            flash[:alert] = 'Cannot use an existing email!'
             render :new
         end
+    end
+    def edit
+        @user = User.find_by_id params[:id]
+    end
+    def update
+        @user = User.find_by_id params[:id]
+        if @user.update user_params
+            redirect_to root_path, notice: "User information updated"
+        else 
+            flash[:alert] = 'Cannot use an existing email!'
+            render :edit
+        end
+    end
+    def edit_password
+        @user = User.find_by_id params[:id]
+    end
+    def update_password
+        @user = current_user
+        if params[:user][:password] == params[:user][:current_password]
+            flash[:alert] = "Current and New Password cannot be the same!"
+            render :edit
+        elsif @user&.authenticate(params[:user][:current_password])
+            if @user.update user_params 
+                redirect_to edit_user_path, notice: "Password successfully updated!"
+            else
+                flash[:alert] = "New Password and Confirmation Password does not match!"
+                render :edit
+            end
+        else 
+            flash[:alert] = "Current Password is incorrect! Please try again"
+            render :edit
+        end    
     end
     def panel
     end

@@ -1,5 +1,12 @@
 <div class="padding">
     <%= form_for @post do |f| %>
+    <% if @post.errors.any? %>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %> 
         <br>
         <div class="form-group">
             <%= f.label :title %>: <br>
@@ -11,6 +18,6 @@
             
         </div>
         <br>
-        <button class="btn btn-outline-primary" type="submit">Update Post</button>
+        <%= f.submit "Update Post", class: 'btn btn-outline-primary' %>
     <% end %>
 </div>
