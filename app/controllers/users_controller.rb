@@ -32,17 +32,17 @@ class UsersController < ApplicationController
         @user = current_user
         if params[:user][:password] == params[:user][:current_password]
             flash[:alert] = "Current and New Password cannot be the same!"
-            render :edit
+            render :edit_password
         elsif @user&.authenticate(params[:user][:current_password])
             if @user.update user_params 
                 redirect_to edit_user_path, notice: "Password successfully updated!"
             else
                 flash[:alert] = "New Password and Confirmation Password does not match!"
-                render :edit
+                render :edit_password
             end
         else 
             flash[:alert] = "Current Password is incorrect! Please try again"
-            render :edit
+            render :edit_password
         end    
     end
     def panel
