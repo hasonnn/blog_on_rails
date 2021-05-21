@@ -1,18 +1,18 @@
 <div>
     <%= form_with(model:[@post, @comment], local:true) do |f| %>
-    <% if @comment.errors.full_messages.each do |msg| %>
-    <ul>
-        <li> <%= msg %></li>
-    </ul>
+    <% if @comment.errors.any? %>
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
-    <% end %>
+      </ul>
+    <% end %> 
 
     <br>
-    <p>Comment</p>
+    <h3>Comment</h3>
     <div>
-        <%= f.text_area(:body, cols: 50, rows:5, placeholder: `What's on your mind?`) %>
+        <%= f.text_area(:body, cols: 75, rows:5, placeholder:`What's on your mind?`) %>
     </div>
-
-        <%= f.submit %>
+    <%= f.submit "Comment", class: 'btn btn-outline-primary' %>
     <% end %>
 </div>
