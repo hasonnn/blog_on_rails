@@ -1,17 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light padding">
-  <a class="navbar-brand" href="/">Blog on Rails</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'New Post', new_post_path, class:"nav-link" %>
-      </li>
-    </ul>
+ <nav class="navbar navbar-light bg-light padding d-flex justify-content-between">
+  <div>
+    <a class="navbar-brand" href="/">Blog on Rails</a>
   </div>
-</nav>  
+
+  <div class="d-flex justify-content-around flex-row m-4">  
+    <%= link_to 'Home', root_path %>
+    <div class="ml-4">
+      <%= link_to 'New Post', new_post_path %>
+    </div>
+
+    <% if user_signed_in?%>
+    <div class="ml-4">
+      Hello <%=link_to current_user.full_name, edit_user_path(current_user.id) %>!
+    </div> 
+    <div class="ml-4">
+      <%= link_to 'Logout', session_path, method: :delete, data:{confirm: 'Are you sure you want to log out?'} %>
+    </div>  
+    <% else %>
+    <div class="ml-4">
+      <%= link_to 'Login', new_session_path  %>
+    </div>
+    <div class="ml-4">   
+      <%= link_to 'Sign Up', new_user_path  %> 
+    </div>  
+    <% end %> 
+
+    <% if current_user&.is_admin? %>
+    <div class="ml-4">
+      <%= link_to 'Admin Panel', users_panel_path %>  
+    </div> 
+    <% end %>
+  </div>
+</nav>
